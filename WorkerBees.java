@@ -1,3 +1,32 @@
+/*
+ * WORKER BEES HACKATHON
+ * By Soham Panda, Aryan Anand, and Jason Carrasco
+ * 3rd Period - A Day, AP Computer Science A
+ * This class simulates the improvement process of a normal Worker Bee in the dystopian world of the Robot Overlords.
+ * Users will be shown choices to choose from in order to keep their Worker Bee healthy, safe, and thriving.
+ */
+ 
+/*
+ * NOTES:
+ * Please be sure to replace the file path in the "getResources()" method with your own path aligned with BeeResources.dat!
+ * "Thread.sleep()" and "System.exit(0) were used to pause and terminate the program at mandatory times."
+ * All methods, classes, objects, variables, reference variables, and datatypes have been camel cased. [Ex: camelCase]
+ * This java file is over 700 lines. 5 methods are boilerplated (repeated code with different "System.out.print" text) repeatedly.
+ * All principles of object oriented programming were covered in this singular file: Abstraction, Ecnapsulation, Polymorphism, and Inheritance.
+ */
+
+/* 
+ * IMPORTS:
+ * These are the required libraries needed to import to the WorkerBees class.
+ * java.io.File - This is used to read files.
+ * java.io.FileNotFoundException - This is used to throw file reader errors from file reader object.
+ * java.util.InputMismatchException - This is used to throw input errors from scanner object.
+ * java.lang.InterruptedException - This is used to throw program pausing errors.
+ * java.util.Scanner - This is used to get user input.
+ * java.lang.Math - This is used for using math functions such as rounding and randomization.
+ * java.lang.Thread - This is used for pausing the program.
+ */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
@@ -6,7 +35,18 @@ import java.util.Scanner;
 import java.lang.Math;
 import java.lang.Thread;
 
-abstract class BeeResources {
+/*
+ * ABSTRACT CLASS BeeResources:
+ * This class is used to set and get variables, objects, references, etc. for the program.
+ * Doing this will be easier for methods to access any data or item in this file instead of returning.
+ * This class is abstracted in order to not reveal any implementation methods to the user.
+ * All reference variables are encapsulated and are set as protected in order to prevent a resource leak which an exception can't handle.
+ * The "this." is to refer back to the variables as the object under the setter method "setResources()".
+ * All other variables are getter methods and readers which get objects for cross-method usability.
+ * Finally, they are returned for use. [Please note that they are not supposed to be "final" because these will be changed depending on user input]
+ */
+
+abstract class BeeResources { // This was written by Soham.
     protected Scanner sc = new Scanner(System.in);
 
     public Scanner getScannerObject() {
@@ -52,7 +92,25 @@ abstract class BeeResources {
     }
 }
 
-public class WorkerBees extends BeeResources {
+/*
+ * PUBLIC CLASS WorkerBees:
+ * This class which defines this file is the main class that procceses inputs from the user and produces outputs to the user through logic and conditioning.
+ * In order to use objects and variables, otherwise known as the resources for WorkerBees.java, we inherit abstract class BeeResources through an extension to public class WorkerBees.
+ * Since our abstract class methods were not defined as static, it was exceptionally important to write instances for the WorkerBees Class in order to avoid an error of non-static presence.
+ * The "getPassword()" method requires a simple, randomized PIN from the user. We use a while loop to loop through till the user has found the pin after a certain trial of tries of PIN codes.
+ * The "getResources()" method uses the file reader object to the maximum. We gathered the data from the BeeResources.dat file in order to extract them into our 4 objects.
+ * A scenario is given to the user for them to be informed and to know what the program is about.
+ * The following methods: "ScenarioOne() {all the way through} SecnarioFive()" are five methods that used to ask questions to the user. Read the following for more elaboration.
+ * Since these are boilerplate methods written from the "ScenarioOne()" method, it was simple to replace questions and answers with different things in order to increase variability.
+ * For example, take any scenario method. This method will first give a situation that the user will face as a worker bee. They will need to answer the following question acoordingly.
+ * Once answered, they will have percentages, integers, or points gaied or taken away depending on the answer choice they have chosen.
+ * If any one of the objects reach 0% or go below that percentage level, the program will exit and tell the user that they have not saved their worker bee.
+ * Boolean operations were used to determine when this percentage and when the end result (discussed in next line) is met including conditionals like "if/else/else if" and logical operators such as "||", "&&".
+ * Finally, the last method "finalResult()" gives a result to the user if they have gone through all 5 scenario methods without getting a negative/zero percentage.
+ * They will recieve either a bronze, silver, or a gold badge determining how high their percentages and levels are for their Worker Bee.
+ */
+
+public class WorkerBees extends BeeResources { // This was written by Soham, Aryan, and Jason.
 
     /**
      * These comments are error exceptions to be thrown when reading files, passing inputs, and program terminations.
@@ -62,7 +120,7 @@ public class WorkerBees extends BeeResources {
      * @param args
      */
 
-    public static void main(String[] args) throws InputMismatchException, FileNotFoundException, InterruptedException {
+    public static void main(String[] args) throws InputMismatchException, FileNotFoundException, InterruptedException { // This was written by Aryan.
         WorkerBees ClassInstance = new WorkerBees();
 
         ClassInstance.getPassword();
@@ -75,7 +133,7 @@ public class WorkerBees extends BeeResources {
         ClassInstance.finalResult();
     }
 
-    public void getPassword() throws InputMismatchException {
+    public void getPassword() throws InputMismatchException { // This was written by Jason.
         int secretNumber = (int) (Math.random() * 10) + 1;
         int userGuess = 0;
 
@@ -107,7 +165,7 @@ public class WorkerBees extends BeeResources {
         }
     }
 
-    public void getResources() throws FileNotFoundException, InterruptedException {
+    public void getResources() throws FileNotFoundException, InterruptedException { // This was written by Aryan.
         // NOTE: You will need to replace this file path with your own path aligned with BeeResources.dat!
         readResources("/Users/sohampanda/Desktop/Programming/APCSA/BeeResources.dat");
         Thread.sleep(700);
@@ -133,7 +191,7 @@ public class WorkerBees extends BeeResources {
 
     }
 
-    public void ScenarioOne() throws InputMismatchException, InterruptedException {
+    public void ScenarioOne() throws InputMismatchException, InterruptedException { // This was written by Jason.
         Thread.sleep(3000);
 
         String questionOneResult = "";
@@ -227,7 +285,7 @@ public class WorkerBees extends BeeResources {
         }
     }
 
-    public void ScenarioTwo() throws InputMismatchException, InterruptedException {
+    public void ScenarioTwo() throws InputMismatchException, InterruptedException { // This was written by Soham.
         Thread.sleep(3000);
 
         String questionTwoResult = "";
@@ -324,7 +382,7 @@ public class WorkerBees extends BeeResources {
         }
     }
 
-    public void ScenarioThree() throws InputMismatchException, InterruptedException {
+    public void ScenarioThree() throws InputMismatchException, InterruptedException { // This was written by Soham.
         Thread.sleep(3000);
 
         String questionThreeResult = "";
@@ -421,7 +479,7 @@ public class WorkerBees extends BeeResources {
         }
     }
 
-    public void ScenarioFour() throws InputMismatchException, InterruptedException {
+    public void ScenarioFour() throws InputMismatchException, InterruptedException { // This was written by Aryan.
         Thread.sleep(3000);
 
         String questionFourResult = "";
@@ -524,7 +582,7 @@ public class WorkerBees extends BeeResources {
         }
     }
 
-    public void ScenarioFive() throws InputMismatchException, InterruptedException {
+    public void ScenarioFive() throws InputMismatchException, InterruptedException { // This was written by Jason.
         Thread.sleep(3000);
 
         String questionFourResult = "";
@@ -628,7 +686,7 @@ public class WorkerBees extends BeeResources {
         }
     }
 
-    public void finalResult() throws InterruptedException {
+    public final void finalResult() throws InterruptedException { // This was written by Soham.
         Thread.sleep(3000);
 
         System.out.println("If you had made it through all 5 scenarios, congratulations on keeping your Worker Bee safe and healthy!");
@@ -653,5 +711,4 @@ public class WorkerBees extends BeeResources {
             System.out.println("You won a " + bronzeResult + "." + " Great job!");
         }
     }
-
 }
